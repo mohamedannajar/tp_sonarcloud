@@ -296,7 +296,7 @@ internal class MediaPlayerPlayback(context: Context) : LocalPlayback(context), M
     }
 
     override fun updateLastKnownStreamPosition() {
-
+        // No-op: position is always read from MediaPlayer; unlike CastPlayback, nothing to cache.
     }
 
     private fun createMediaPlayer(context: Context): MediaPlayer {

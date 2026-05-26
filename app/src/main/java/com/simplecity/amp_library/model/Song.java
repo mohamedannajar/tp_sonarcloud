@@ -156,24 +156,18 @@ public class Song implements
     }
 
     public int getPlayCount(Context context) {
-
-        int playCount = 0;
-
-        Uri playCountUri = PlayCountTable.URI;
-        Uri appendedUri = ContentUris.withAppendedId(playCountUri, id);
-
-        if (appendedUri != null) {
-
-            Query query = new Query.Builder()
-                    .uri(appendedUri)
-                    .projection(new String[] { PlayCountTable.COLUMN_ID, PlayCountTable.COLUMN_PLAY_COUNT })
-                    .build();
-
-            playCount = SqlUtils.createSingleQuery(context, cursor ->
-                    cursor.getInt(cursor.getColumnIndex(PlayCountTable.COLUMN_PLAY_COUNT)), 0, query);
+        Uri appendedUri = ContentUris.withAppendedId(PlayCountTable.URI, id);
+        if (appendedUri == null) {
+            return 0;
         }
 
-        return playCount;
+        Query query = new Query.Builder()
+                .uri(appendedUri)
+                .projection(new String[] { PlayCountTable.COLUMN_ID, PlayCountTable.COLUMN_PLAY_COUNT })
+                .build();
+
+        return SqlUtils.createSingleQuery(context, cursor ->
+                cursor.getInt(cursor.getColumnIndex(PlayCountTable.COLUMN_PLAY_COUNT)), 0, query);
     }
 
     public void setStartTime() {
