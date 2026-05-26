@@ -139,31 +139,31 @@ public class FolderFragment extends BaseFragment implements
     private Disposable setItemsDisposable;
 
     @Inject
-    Repository.BlacklistRepository blacklistRepository;
+    private Repository.BlacklistRepository blacklistRepository;
 
     @Inject
-    Repository.WhitelistRepository whitelistRepository;
+    private Repository.WhitelistRepository whitelistRepository;
 
     @Inject
-    Repository.SongsRepository songsRepository;
+    private Repository.SongsRepository songsRepository;
 
     @Inject
-    Repository.PlaylistsRepository playlistsRepository;
+    private Repository.PlaylistsRepository playlistsRepository;
 
     @Inject
-    SettingsManager settingsManager;
+    private SettingsManager settingsManager;
 
     @Inject
-    AnalyticsManager analyticsManager;
+    private AnalyticsManager analyticsManager;
 
     @Inject
-    RingtoneManager ringtoneManager;
+    private RingtoneManager ringtoneManager;
 
     @Inject
-    PlaylistManager playlistManager;
+    private PlaylistManager playlistManager;
 
     @Inject
-    PlaylistMenuHelper playlistMenuHelper;
+    private PlaylistMenuHelper playlistMenuHelper;
 
     public static FolderFragment newInstance(String title, boolean isDisplayedInTabs) {
         FolderFragment fragment = new FolderFragment();

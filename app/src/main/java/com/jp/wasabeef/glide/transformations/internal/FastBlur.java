@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 public final class FastBlur {
 
     private FastBlur() {
+        throw new AssertionError("Utility class");
     }
 
     public static Bitmap blur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {

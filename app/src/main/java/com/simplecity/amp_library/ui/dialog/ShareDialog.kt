@@ -18,7 +18,6 @@ import com.simplecity.amp_library.R
 import com.simplecity.amp_library.model.Song
 import com.simplecity.amp_library.utils.extensions.share
 import java.io.File
-import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
@@ -50,23 +49,17 @@ class ShareDialog : DialogFragment() {
                                 override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>) {
                                     val sendIntent = Intent()
                                     sendIntent.type = "text/plain"
-                                    var fileOutputStream: FileOutputStream? = null
                                     try {
                                         val file = File(context!!.filesDir.toString() + "/share_image.jpg")
-                                        fileOutputStream = FileOutputStream(file)
                                         if (resource != null) {
-                                            resource.compress(Bitmap.CompressFormat.JPEG, 80, fileOutputStream)
-                                            sendIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider", file))
-                                            sendIntent.type = "image/jpeg"
+                                            FileOutputStream(file).use { fileOutputStream ->
+                                                resource.compress(Bitmap.CompressFormat.JPEG, 80, fileOutputStream)
+                                                sendIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider", file))
+                                                sendIntent.type = "image/jpeg"
+                                            }
                                         }
-                                    } catch (ignored: FileNotFoundException) {
-
-                                    } finally {
-                                        try {
-                                            fileOutputStream?.close()
-                                        } catch (ignored: IOException) {
-
-                                        }
+                                    } catch (ignored: IOException) {
+                                        // Share without image attachment if the cache file cannot be written.
                                     }
 
                                     sendIntent.action = Intent.ACTION_SEND
