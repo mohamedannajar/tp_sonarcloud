@@ -1,6 +1,7 @@
 package com.simplecity.amp_library.ui.modelviews;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -53,7 +54,7 @@ public class SuggestedHeaderView extends BaseViewModel<SuggestedHeaderView.ViewH
 
         holder.titleOne.setText(suggestedHeader.title);
         holder.titleTwo.setText(suggestedHeader.subtitle);
-        if (suggestedHeader.subtitle == null || suggestedHeader.subtitle.length() == 0) {
+        if (TextUtils.isEmpty(suggestedHeader.subtitle)) {
             holder.titleTwo.setVisibility(View.GONE);
         } else {
             holder.titleTwo.setVisibility(View.VISIBLE);
