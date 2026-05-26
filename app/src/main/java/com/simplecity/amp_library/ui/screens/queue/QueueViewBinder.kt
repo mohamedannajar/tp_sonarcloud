@@ -15,7 +15,6 @@ import com.simplecity.amp_library.R
 import com.simplecity.amp_library.model.Song
 import com.simplecity.amp_library.ui.adapters.ViewType
 import com.simplecity.amp_library.ui.modelviews.BaseSelectableViewModel
-import com.simplecity.amp_library.ui.modelviews.SelectableViewModel
 import com.simplecity.amp_library.ui.modelviews.SectionedView
 import com.simplecity.amp_library.ui.views.NonScrollImageButton
 import com.simplecity.amp_library.utils.PlaceholderProvider
@@ -31,7 +30,6 @@ class QueueViewBinder(
     private val settingsManager: SettingsManager
 ) :
     BaseSelectableViewModel<QueueViewBinder.ViewHolder>(),
-    SelectableViewModel,
     SectionedView {
 
     interface ClickListener {

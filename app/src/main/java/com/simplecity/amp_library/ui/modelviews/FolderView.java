@@ -29,7 +29,7 @@ import com.simplecityapps.recycler_adapter.recyclerview.BaseViewHolder;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class FolderView extends BaseSelectableViewModel<FolderView.ViewHolder> implements SelectableViewModel {
+public class FolderView extends BaseSelectableViewModel<FolderView.ViewHolder> {
 
     private static final String TAG = "FolderView";
 

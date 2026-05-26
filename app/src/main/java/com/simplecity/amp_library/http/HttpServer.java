@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -128,7 +129,7 @@ public class HttpServer {
                         long contentLength = end - start + 1;
                         cleanupAudioStream();
                         audioInputStream = new FileInputStream(file);
-                        audioInputStream.skip(start);
+                        skipFully(audioInputStream, start);
                         Response response = newFixedLengthResponse(Response.Status.PARTIAL_CONTENT, getMimeType(audioFileToServe), audioInputStream, contentLength);
                         response.addHeader("Content-Length", contentLength + "");
                         response.addHeader("Content-Range", "bytes " + start + "-" + end + "/" + fileLength);
@@ -152,6 +153,22 @@ public class HttpServer {
             }
             Log.e(TAG, "Returning NOT_FOUND response");
             return newFixedLengthResponse(Response.Status.NOT_FOUND, MIME_TYPE_HTML, FILE_NOT_FOUND_MESSAGE);
+        }
+    }
+
+    private static void skipFully(InputStream input, long bytesToSkip) throws IOException {
+        long remaining = bytesToSkip;
+        while (remaining > 0) {
+            long skipped = input.skip(remaining);
+            if (skipped > 0) {
+                remaining -= skipped;
+            } else {
+                int b = input.read();
+                if (b == -1) {
+                    break;
+                }
+                remaining--;
+            }
         }
     }
 

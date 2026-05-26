@@ -26,7 +26,7 @@ import com.simplecityapps.recycler_adapter.recyclerview.BaseViewHolder;
 import java.util.Arrays;
 import java.util.List;
 
-public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> implements SelectableViewModel, SectionedView {
+public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> implements SectionedView {
 
     public interface ClickListener {
 

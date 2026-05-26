@@ -19,7 +19,7 @@ import com.simplecity.amp_library.utils.sorting.SortManager;
 import java.util.Arrays;
 import java.util.List;
 
-public class AlbumView extends MultiItemView<AlbumView.ViewHolder, Album> implements SectionedView {
+public class AlbumView extends MultiItemView<AlbumView.ViewHolder> implements SectionedView {
 
     public interface ClickListener {
 
