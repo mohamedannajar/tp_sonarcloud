@@ -151,12 +151,7 @@ public class TaggerUtils {
                             Log.w(TAG, "Unexpected external file dir: " + file.getAbsolutePath());
                         } else {
                             String path = file.getAbsolutePath().substring(0, index);
-                            try {
-                                path = new File(path).getCanonicalPath();
-                            } catch (IOException e) {
-                                // Keep non-canonical path.
-                            }
-                            paths.add(path);
+                            paths.add(toCanonicalPathOrSame(path));
                         }
                     }
                 }
@@ -165,6 +160,15 @@ public class TaggerUtils {
             Crashlytics.log("getExtSdCardPaths() failed. " + e.getMessage());
         }
         return paths.toArray(new String[paths.size()]);
+    }
+
+    private static String toCanonicalPathOrSame(String path) {
+        try {
+            return new File(path).getCanonicalPath();
+        } catch (IOException e) {
+            Log.w(TAG, "Could not get canonical path for: " + path, e);
+            return path;
+        }
     }
 
     static void copyFile(File sourceFile, File destFile) throws IOException {

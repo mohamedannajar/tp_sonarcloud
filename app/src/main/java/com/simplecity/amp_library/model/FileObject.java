@@ -7,6 +7,8 @@ import com.simplecity.amp_library.utils.StringUtils;
 
 public class FileObject extends BaseFileObject {
 
+    private static final long serialVersionUID = 1L;
+
     public String extension;
 
     public TagInfo tagInfo;
@@ -22,6 +24,24 @@ public class FileObject extends BaseFileObject {
             duration = FileHelper.getDuration(context, this);
         }
         return StringUtils.makeTimeString(context, duration / 1000);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        FileObject that = (FileObject) o;
+
+        return extension != null ? extension.equals(that.extension) : that.extension == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (extension != null ? extension.hashCode() : 0);
+        return result;
     }
 
     @Override

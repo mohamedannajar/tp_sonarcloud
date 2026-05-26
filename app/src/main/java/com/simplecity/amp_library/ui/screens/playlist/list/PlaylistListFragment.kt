@@ -24,7 +24,6 @@ import com.simplecityapps.recycler_adapter.adapter.ViewModelAdapter
 import com.simplecityapps.recycler_adapter.recyclerview.RecyclerListener
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class PlaylistListFragment :
@@ -35,8 +34,6 @@ class PlaylistListFragment :
     private lateinit var adapter: ViewModelAdapter
 
     private var playlistClickListener: PlaylistClickListener? = null
-
-    private val refreshDisposable: Disposable? = null
 
     private val disposables = CompositeDisposable()
 
@@ -88,8 +85,6 @@ class PlaylistListFragment :
 
     override fun onPause() {
         super.onPause()
-
-        refreshDisposable?.dispose()
 
         disposables.clear()
     }
