@@ -25,7 +25,7 @@ public class Album implements
     public long id;
     public String name;
 
-    public List<Artist> artists = new ArrayList<>();
+    private List<Artist> artists = new ArrayList<>();
     public String albumArtistName;
 
     public int year;
@@ -42,6 +42,10 @@ public class Album implements
     private String artworkKey;
 
     private String sortKey;
+
+    public List<Artist> getArtists() {
+        return artists;
+    }
 
     private Album(Builder builder) {
         this.id = builder.id;

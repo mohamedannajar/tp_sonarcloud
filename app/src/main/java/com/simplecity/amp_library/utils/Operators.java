@@ -40,9 +40,9 @@ public class Operators {
                 oldAlbum.songPlayCount += song.playCount;
 
                 //Add any new artists
-                Stream.of(album.artists)
-                        .filter(artist -> !oldAlbum.artists.contains(artist))
-                        .forEach(artist -> oldAlbum.artists.add(artist));
+                Stream.of(album.getArtists())
+                        .filter(artist -> !oldAlbum.getArtists().contains(artist))
+                        .forEach(artist -> oldAlbum.getArtists().add(artist));
 
                 //Add new paths
                 Stream.of(album.paths)

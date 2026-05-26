@@ -13,6 +13,12 @@ class HeadsetManager(
 
     private var headsetReceiver: BroadcastReceiver? = null
 
+    companion object {
+        private const val EXTRA_STATE = "state"
+        private const val STATE_DISCONNECTED = 0
+        private const val STATE_CONNECTED = 1
+    }
+
     fun registerHeadsetPlugReceiver(context: Context) {
 
         val filter = IntentFilter()
@@ -26,13 +32,12 @@ class HeadsetManager(
                     return
                 }
 
-                if (intent.hasExtra("state")) {
-                    if (intent.getIntExtra("state", 0) == 0) {
-                        if (playbackSettingsManager.pauseOnHeadsetDisconnect) {
+                if (intent.hasExtra(EXTRA_STATE)) {
+                    when (intent.getIntExtra(EXTRA_STATE, STATE_DISCONNECTED)) {
+                        STATE_DISCONNECTED -> if (playbackSettingsManager.pauseOnHeadsetDisconnect) {
                             playbackManager.pause(false)
                         }
-                    } else if (intent.getIntExtra("state", 0) == 1) {
-                        if (playbackSettingsManager.playOnHeadsetConnect) {
+                        STATE_CONNECTED -> if (playbackSettingsManager.playOnHeadsetConnect) {
                             playbackManager.play()
                         }
                     }

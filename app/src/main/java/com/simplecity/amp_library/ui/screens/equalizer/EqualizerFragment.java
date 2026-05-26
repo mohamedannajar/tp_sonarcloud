@@ -252,20 +252,12 @@ public class EqualizerFragment extends BaseFragment implements
             ((TextView) eqContainer.findViewById(eqViewElementIds[band][0])).setText(format("%.0f ", centerFreqHz) + unitPrefix + "Hz");
             mEqualizerSeekBar[band] = eqContainer.findViewById(eqViewElementIds[band][1]);
             mEqualizerSeekBar[band].setMax((bandLevelRange[1] / 100) - (bandLevelRange[0] / 100));
+            final int equalizerBand = band;
             mEqualizerSeekBar[band].setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
 
                     if (fromUser) {
-                        //Determine which band changed
-                        int seekbarId = seekBar.getId();
-                        int band = 0;
-                        for (int i = 0; i < eqViewElementIds.length; i++) {
-                            if (eqViewElementIds[i][1] == seekbarId) {
-                                band = i;
-                            }
-                        }
-
                         if (eqPreset != eqCustomPresetPosition) {
                             equalizerCopyToCustom();
                             if (spinnerAdapter != null && spinnerAdapter.getCount() > eqCustomPresetPosition) {
@@ -273,7 +265,7 @@ public class EqualizerFragment extends BaseFragment implements
                             }
                         } else {
                             int level = getBandLevelRange()[0] + (progress * 100);
-                            equalizerBandUpdate(band, level);
+                            equalizerBandUpdate(equalizerBand, level);
                         }
                     }
                 }

@@ -107,7 +107,7 @@ public class VoiceSearchActivity extends BaseActivity {
                         .flatMapObservable(Observable::fromIterable)
                         .filter(album -> containsIgnoreCase(album.name, filterString)
                                 || containsIgnoreCase(album.name, filterString)
-                                || (Stream.of(album.artists).anyMatch(artist -> containsIgnoreCase(artist.name, filterString)))
+                                || (Stream.of(album.getArtists()).anyMatch(artist -> containsIgnoreCase(artist.name, filterString)))
                                 || containsIgnoreCase(album.albumArtistName, filterString))
                         .flatMapSingle(album -> AlbumExtKt.getSongsSingle(album, songsRepository))
                         .map(songs -> {

@@ -107,7 +107,7 @@ public class FileBrowser {
             FolderObject parentObject = new FolderObject();
             parentObject.fileType = FileType.PARENT;
             parentObject.name = FileHelper.PARENT_DIRECTORY;
-            parentObject.path = FileHelper.getPath(currentDir) + "/" + FileHelper.PARENT_DIRECTORY;
+            parentObject.path = new File(FileHelper.getPath(currentDir), FileHelper.PARENT_DIRECTORY).getPath();
             folderObjects.add(0, parentObject);
         }
 
