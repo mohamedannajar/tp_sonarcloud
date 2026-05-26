@@ -11,6 +11,9 @@ public class SectionedAdapter extends ViewModelAdapter implements FastScrollRecy
     @NonNull
     @Override
     public String getSectionName(int position) {
+        if (position < 0 || position >= getItemCount()) {
+            return "";
+        }
 
         ViewModel viewModel = items.get(position);
 

@@ -22,6 +22,6 @@ public class ColorSetResource implements Resource<ColorSet> {
 
     @Override
     public void recycle() {
-
+        // No-op: ColorSet holds no resources that require explicit release.
     }
 }
